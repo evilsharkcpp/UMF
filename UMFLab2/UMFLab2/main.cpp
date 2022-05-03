@@ -228,7 +228,7 @@ public:
     {
         for (size_t i{ 0 }; i < result.size(); i++)
             for (size_t j{ 0 }; j < result.size(); j++)
-                result[i] = a.getElement(i, j) * b[j];
+                result[i] += a.getElement(i, j) * b[j];
     }
 
     static double norm(const vector<double>& a)
@@ -360,7 +360,7 @@ public:
             double hk = grid[k + 1] - grid[k];
             double tau = time[t] - time[t - 1];
             double coef{ sigma(grid[k]) * hk / (6.0 * tau) };
-            
+
             Operations::multMatrixByC(local, M, coef);
 
             double dq = (qCurrent[k + 1] - qCurrent[k]) / hk;
@@ -436,8 +436,8 @@ public:
             b[elem - 1] = value * time[t];
         }
     }
-    
-    void iter(int t, double eps = 1e-4, double w = 1)
+
+    void iter(int t, double eps = 1e-6, double w = 1, bool newton = false, int maxIterations = 500)
     {
         vector<double> discrepancy(q.size());
         double exit = 0;
@@ -451,7 +451,7 @@ public:
                 b[j] = 0;
             }
             setMatrix(t);
-            setDifMatrix(t);
+            if (newton) setDifMatrix(t);
             setFirstBound("bound1.txt", t);
             a.print();
             LUMethod lu(a.a, b);
@@ -463,17 +463,20 @@ public:
                 q[j] = w * q[j] + (1 - w) * qCurrent[j];
             for (int j = 0; j < discrepancy.size(); j++)
                 discrepancy[j] = q[j] - qCurrent[j];
-            exit = Operations::norm(discrepancy) / Operations::norm(q);
+            vector<double> f(q.size());
+            Operations::multMatrixByVector(f, a, qCurrent);
+            for (int i = 0; i < f.size(); i++)
+                f[i] -= b[i];
+            exit = Operations::norm(f) / Operations::norm(b);//Operations::norm(discrepancy) / Operations::norm(q);
             for (int j = 0; j < q.size(); j++)
                 qCurrent[j] = q[j];
-            iter++;
-        } while (abs(exit) > eps);
+        } while (abs(exit) > eps && iter++ < maxIterations);
         ofstream out(to_string(t) + ".txt");
         out << iter << endl << exit;
         out.close();
     }
-    
-    void solve()
+
+    void solve(double eps, bool type, double w, int maxIter)
     {
         for (int i = 0; i < qCurrent.size(); i++)
         {
@@ -482,7 +485,7 @@ public:
         }
         for (int t = 1; t < time.size(); t++)
         {
-            iter(t);
+            iter(t, eps, w, type, maxIter);
             for (int j = 0; j < q.size(); j++)
                 qTime[j] = qCurrent[j];
         }
@@ -497,6 +500,6 @@ int main()
     a.setTime("time.txt");
     a.setElements("elements.txt");
     a.Init();
-    a.solve();
+    a.solve(1e-15, false, 1, 500);
     return 0;
 }
