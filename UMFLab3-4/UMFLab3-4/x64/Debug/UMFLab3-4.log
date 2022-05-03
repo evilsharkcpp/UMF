@@ -1,0 +1,12 @@
+﻿  main.cpp
+C:\Users\asaul\source\repos\UMFLab3-4\UMFLab3-4\main.cpp(309,1): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\asaul\source\repos\UMFLab3-4\UMFLab3-4\main.cpp(330,1): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\asaul\source\repos\UMFLab3-4\UMFLab3-4\main.cpp(417,82): warning C4267: +=: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\asaul\source\repos\UMFLab3-4\UMFLab3-4\main.cpp(426,1): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\asaul\source\repos\UMFLab3-4\UMFLab3-4\main.cpp(434,1): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\asaul\source\repos\UMFLab3-4\UMFLab3-4\main.cpp(447,1): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\asaul\source\repos\UMFLab3-4\UMFLab3-4\main.cpp(447,122): warning C4267: +=: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\asaul\source\repos\UMFLab3-4\UMFLab3-4\main.cpp(456,1): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\asaul\source\repos\UMFLab3-4\UMFLab3-4\main.cpp(479,1): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\asaul\source\repos\UMFLab3-4\UMFLab3-4\main.cpp(391): warning C4715: FEM::GetBound: значение возвращается не при всех путях выполнения
+  UMFLab3-4.vcxproj -> C:\Users\asaul\source\repos\UMFLab3-4\x64\Debug\UMFLab3-4.exe
