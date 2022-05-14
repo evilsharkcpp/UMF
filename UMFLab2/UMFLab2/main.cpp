@@ -133,8 +133,6 @@ struct Element
     double gamma;
 };
 
-
-
 class Matrix
 {
 
@@ -271,6 +269,7 @@ public:
     {
         return dq + 1;
     }
+    
     double difLambda(double dq, double t)
     {
         return 1;
@@ -289,6 +288,7 @@ public:
         double l2 = lambdaNewton(dq, hx, i, j, t);
         return (i == r) ? (l1 + l2) / (2 * hx) : -(l1 + l2) / (2 * hx);
     }
+    
     double f(double x, double t)
     {
         return -8 * x * t * t - 2 * t + x * x;
@@ -313,10 +313,10 @@ public:
         ifstream in(fileName);
         int size;
         in >> size;
-        elements.resize(size);
+        //elements.resize(size);
     }
 
-    void setGrid(string fileName)
+    void setGrid(string fileName, bool isRaw = true)
     {
         ifstream in(fileName);
         double a = 0;
@@ -325,31 +325,56 @@ public:
         in >> a >> b >> n;
         double h = (b - a) / n;
         int i = 0;
-        while (true)
+        if (isRaw)
         {
-            if (a + i * h >= b) break;
-            grid.push_back(a + i * h);
-            i++;
+           while (true)
+           {
+              if (a + i * h >= b) break;
+              grid.push_back(a + i * h);
+              i++;
+           }
+           grid.push_back(b);
         }
-        grid.push_back(b);
+        else
+        {
+           double pi = 3.1415926535897932;
+           for (int i{ 0 }; i < n; i++)
+           {
+              grid.push_back((b - a) * (1 - cos(pi * i / (2 * n))));
+           }
+           grid.push_back(b);
+        }
+        elements.resize(grid.size() - 1);
     }
 
-    void setTime(string fileName)
+    void setTime(string fileName, bool isRaw = true)
     {
         ifstream in(fileName);
         double a = 0;
-        double b = 1;
+        double b = 0;
         int n = 0;
         in >> a >> b >> n;
         double h = (b - a) / n;
         int i = 0;
-        while (true)
+        if (isRaw)
         {
-            if (a + i * h >= b) break;
-            time.push_back(a + i * h);
-            i++;
+           while (true)
+           {
+              if (a + i * h >= b) break;
+              time.push_back(a + i * h);
+              i++;
+           }
+           time.push_back(b);
         }
-        time.push_back(b);
+        else
+        {
+           double pi = 3.1415926535897932;
+           for (int i{ 0 }; i < n; i++)
+           {
+              time.push_back((b - a)* (1 - cos(pi * i / (2 * n))));
+           }
+           time.push_back(b);
+        }
     }
 
     void setMatrix(int t)
@@ -437,7 +462,7 @@ public:
         }
     }
 
-    void iter(int t, double eps = 1e-6, double w = 1, bool newton = false, int maxIterations = 500)
+    void iter(int t, double eps = 1e-6, double w = 1, bool isNewton = false, int maxIterations = 500)
     {
         vector<double> discrepancy(q.size());
         double exit = 0;
@@ -451,7 +476,7 @@ public:
                 b[j] = 0;
             }
             setMatrix(t);
-            if (newton) setDifMatrix(t);
+            if (isNewton) setDifMatrix(t);
             setFirstBound("bound1.txt", t);
             a.print();
             LUMethod lu(a.a, b);
@@ -476,7 +501,7 @@ public:
         out.close();
     }
 
-    void solve(double eps, bool type, double w, int maxIter)
+    void solve(double eps, bool isNewton, double w, int maxIter)
     {
         for (int i = 0; i < qCurrent.size(); i++)
         {
@@ -485,21 +510,20 @@ public:
         }
         for (int t = 1; t < time.size(); t++)
         {
-            iter(t, eps, w, type, maxIter);
+            iter(t, eps, w, isNewton, maxIter);
             for (int j = 0; j < q.size(); j++)
                 qTime[j] = qCurrent[j];
         }
     }
 };
 
-
 int main()
 {
     FEM a;
-    a.setGrid("grid.txt");
+    a.setGrid("grid.txt",false);
     a.setTime("time.txt");
     a.setElements("elements.txt");
     a.Init();
-    a.solve(1e-15, false, 1, 500);
+    a.solve(1e-15, true, 1, 500);
     return 0;
 }
