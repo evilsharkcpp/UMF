@@ -217,8 +217,8 @@ class Operations
 public:
     static void multMatrixByC(vector<vector<double>>& result, const vector<vector<double>>& a, double b)
     {
-        for (size_t i{ 0 }; i < result.size(); i++)
-            for (size_t j{ 0 }; j < result[i].size(); j++)
+        for (size_t i{ 0 }; i < a.size(); i++)
+            for (size_t j{ 0 }; j < a.size(); j++)
                 result[i][j] += a[i][j] * b;
     }
 
@@ -265,14 +265,14 @@ public:
         return 1;
     }
 
-    double lambda(double dq, double t)
+    double lambda(double dq, double t, double x)
     {
-        return dq + 1;
+       return dq + 1;
     }
     
     double difLambda(double dq, double t)
     {
-        return 1;
+       return 1;
     }
 
     double lambdaNewton(double dq, double hx, int i, int j, int t)
@@ -291,9 +291,14 @@ public:
     
     double f(double x, double t)
     {
-        return -8 * x * t * t - 2 * t + x * x;
+       return -8 * x * t * t - 2 * t + x * x;
     }
 
+    double trueQ(double x, double t)
+    {
+       return x * x * t;
+    }
+    
     FEM()
     {
 
@@ -389,8 +394,10 @@ public:
             Operations::multMatrixByC(local, M, coef);
 
             double dq = (qCurrent[k + 1] - qCurrent[k]) / hk;
-            coef = (lambda(dq, time[t]) + lambda(dq, time[t])) / (2 * hk);
+            coef = (lambda(dq, time[t], grid[k]) + lambda(dq, time[t], grid[k + 1])) / (2 * hk);
+            
             Operations::multMatrixByC(local, G, coef);
+
             a.setElement(k, k, local[0][0] + a.getElement(k, k));
             a.setElement(k, k + 1, local[0][1] + a.getElement(k, k + 1));
             a.setElement(k + 1, k, local[1][0] + a.getElement(k + 1, k));
@@ -403,8 +410,8 @@ public:
 
             //test with q
 
-            b[k] += (hk / 6.0) * (f(grid[k], time[t]) * M[0][0] + f(grid[k + 1], time[t]) * M[0][1]) + (hk / (6.0 * tau)) * (qTime[k] * sigma(grid[k]) * M[0][0] + qTime[k + 1] * sigma(grid[k]) * M[0][1]);
-            b[k + 1] += (hk / 6.0) * (f(grid[k], time[t]) * M[1][0] + f(grid[k + 1], time[t]) * M[1][1]) + (hk / (6.0 * tau)) * (qTime[k] * sigma(grid[k + 1]) * M[1][0] + qTime[k + 1] * sigma(grid[k + 1]) * M[1][1]);
+            b[k] += (hk / 6.0) * (f(grid[k], time[t]) * M[0][0] + f(grid[k + 1], time[t]) * M[0][1]) + (hk / (6.0 * tau)) * (qTime[k] * sigma(grid[k]) * M[0][0] + qTime[k + 1] * sigma(grid[k+1]) * M[0][1]);
+            b[k + 1] += (hk / 6.0) * (f(grid[k], time[t]) * M[1][0] + f(grid[k + 1], time[t]) * M[1][1]) + (hk / (6.0 * tau)) * (qTime[k] * sigma(grid[k]) * M[1][0] + qTime[k + 1] * sigma(grid[k + 1]) * M[1][1]);
         }
     }
 
@@ -465,6 +472,8 @@ public:
     void iter(int t, double eps = 1e-6, double w = 1, bool isNewton = false, int maxIterations = 500)
     {
         vector<double> discrepancy(q.size());
+        vector<double> discrepancyTrue(q.size());
+        vector<double> trQ(q.size());
         double exit = 0;
         double iter = 0;
         do
@@ -487,17 +496,21 @@ public:
             for (int j = 0; j < q.size(); j++)
                 q[j] = w * q[j] + (1 - w) * qCurrent[j];
             for (int j = 0; j < discrepancy.size(); j++)
-                discrepancy[j] = q[j] - qCurrent[j];
+            {
+               trQ[j] = trueQ(grid[j], t);
+               discrepancyTrue[j] = abs(q[j] - trQ[j]);
+               discrepancy[j] = q[j] - qCurrent[j];
+            }
             vector<double> f(q.size());
             Operations::multMatrixByVector(f, a, qCurrent);
             for (int i = 0; i < f.size(); i++)
                 f[i] -= b[i];
-            exit = Operations::norm(f) / Operations::norm(b);//Operations::norm(discrepancy) / Operations::norm(q);
+            exit = Operations::norm(discrepancy) / Operations::norm(q);//Operations::norm(f) / Operations::norm(b);//
             for (int j = 0; j < q.size(); j++)
                 qCurrent[j] = q[j];
         } while (abs(exit) > eps && iter++ < maxIterations);
         ofstream out(to_string(t) + ".txt");
-        out << iter << endl << exit;
+        out << iter << endl << 1 - Operations::norm(discrepancyTrue)/Operations::norm(trQ);
         out.close();
     }
 
@@ -505,7 +518,7 @@ public:
     {
         for (int i = 0; i < qCurrent.size(); i++)
         {
-            qTime[i] = 0;
+            qTime[i] = 0;//grid[i] * grid[i];
             qCurrent[i] = qTime[i];
         }
         for (int t = 1; t < time.size(); t++)
@@ -520,10 +533,12 @@ public:
 int main()
 {
     FEM a;
-    a.setGrid("grid.txt",false);
-    a.setTime("time.txt");
+    bool isRaw = true;
+    bool isNewton = true;
+    a.setGrid("grid.txt",isRaw);
+    a.setTime("time.txt",isRaw);
     a.setElements("elements.txt");
     a.Init();
-    a.solve(1e-15, true, 1, 500);
+    a.solve(1e-15, isNewton, 1, 500);
     return 0;
 }

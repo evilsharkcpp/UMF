@@ -5,6 +5,8 @@
 
 using namespace std;
 
+//Lab4
+
 class BCG
 {
     vector<vector<double>> a;
