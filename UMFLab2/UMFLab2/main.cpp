@@ -120,6 +120,7 @@ public:
             q[i] = (y[i] - sum) / getElement(i, i);
         }
     }
+    
     void getQ(vector<double>& a)
     {
         for (int i = 0; i < q.size(); i++)
