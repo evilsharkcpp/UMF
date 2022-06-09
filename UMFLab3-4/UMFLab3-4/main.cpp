@@ -100,12 +100,12 @@ public:
       gu = vector<double>(mat.gu);
       gl = vector<double>(mat.gl);
    }
-   
+
    Matrix(int n)
    {
 
    }
-   
+
    Matrix(vector<int>& i, vector<int>& j, int n)
    {
       ig = vector<int>(i);
@@ -118,6 +118,7 @@ public:
    double getElement(int i, int j)
    {
       if (i == j) return di[i];
+      
       if (i > j)
       {
          for (int ind = ig[i]; ind < ig[i + 1]; ind++)
@@ -128,6 +129,7 @@ public:
             }
          }
       }
+      
       if (i < j)
       {
          for (int ind = ig[j]; ind < ig[j + 1]; ind++)
@@ -140,7 +142,12 @@ public:
       }
       return 0;
    }
-
+   void Tranc()
+   {
+      auto tmp = vector<double>(gl);
+      gl = vector<double>(gu);
+      gu = vector <double>(tmp);
+   }
    void setElement(int i, int j, double value)
    {
       if (i == j) di[i] = value;
@@ -175,17 +182,17 @@ public:
    {
       return ig;
    }
-   
+
    int size()
    {
       return di.size();
    }
-   
+
    int size(int i)
    {
       return di.size();
    }
-   
+
    void print()
    {
       ofstream out("out.txt");
@@ -222,12 +229,18 @@ class BCG
 
    void multMatrixByVector(vector<double>& res, Matrix& mat, vector<double>& v)
    {
+      auto jg = mat.getColnsArray();
+      auto ig = mat.getRowsArray();
+
       for (int i = 0; i < res.size(); i++)
       {
-         double sum = 0;
-         for (int j = 0; j < mat.size(i); j++)
-            sum += mat.getElement(i, j) * v[j];
-         res[i] = sum;
+         for (int indI = ig[i]; indI < ig[i + 1] - 2; indI++)
+         {
+            int indJ = jg[indI];
+            res[i] += mat.getElement(i, indJ) * v[indJ];
+            res[indJ] += mat.getElement(indJ, i) * v[i];
+         }
+         res[i] += mat.getElement(i, i) * v[i];
       }
    }
 
@@ -241,10 +254,8 @@ class BCG
 
    Matrix aT()
    {
-      Matrix res(a.size());
-      for (int i = 0; i < a.size(); i++)
-         for (int j = 0; j < a.size(i); j++)
-            res.setElement(j, i, a.getElement(i, j));
+      Matrix res(a);
+      res.Tranc();
       return res;
    }
 public:
@@ -387,15 +398,13 @@ class LOS
 
       for (int i = 0; i < res.size(); i++)
       {
-         double sumi = 0;
-         double sumj = 0;
-         for (int j = ig[i]; j < ig[i + 1]; j++)
+         for (int indI = ig[i]; indI < ig[i + 1] - 2; indI++)
          {
-            int q = jg[j];
-            sumi += mat.getElement(i, q) * v[q];
-            res[q] += mat.getElement(i, q) * v[q];
+            int indJ = jg[indI];
+            res[i] += mat.getElement(i, indJ) * v[indJ];
+            res[indJ] += mat.getElement(indJ, i) * v[i];
          }
-         res[i] += sumi + mat.getElement(i, i) * v[i];
+         res[i] += mat.getElement(i, i) * v[i];
       }
    }
 
@@ -809,13 +818,13 @@ public:
             break;
          }
       }
-      a.print();
+      //a.print();
    }
 
    void solve()
    {
       //BCG solv(a, b, 2);
-      LOS solv(a, b, 1000);
+      LOS solv(a, b, 10000);
       auto x = vector<double>(b.size(), 0);
       solv.calculate(x);
       solv.getResult(q);
@@ -823,11 +832,12 @@ public:
 
    void print()
    {
+      ofstream out("solution.txt");
       for (int i = 0; i < y.size(); i++)
          for (int j = 0; j < x.size(); j++)
          {
             int k = i * x.size() + j;
-            cout << q[2 * k] << endl;
+            out << q[2 * k] << endl;
          }
 
    }
@@ -836,7 +846,7 @@ public:
 int main()
 {
    FEM fem;
-   fem.Init(2, 2);
+   fem.Init(32, 32);
    fem.setParams("", 0, 0, 0, 1);
    fem.setMatrix();
    fem.FirstBound();

@@ -268,7 +268,7 @@ public:
 
     double lambda(double dq, double t, double x)
     {
-       return dq + 1;
+       return dq;
     }
     
     double difLambda(double dq, double t)
@@ -292,7 +292,7 @@ public:
     
     double f(double x, double t)
     {
-       return -8 * x * t * t - 2 * t + x * x;
+       return -8 * x * t * t + x * x;
     }
 
     double trueQ(double x, double t)
@@ -535,7 +535,7 @@ int main()
 {
     FEM a;
     bool isRaw = true;
-    bool isNewton = true;
+    bool isNewton = false;
     a.setGrid("grid.txt",isRaw);
     a.setTime("time.txt",isRaw);
     a.setElements("elements.txt");

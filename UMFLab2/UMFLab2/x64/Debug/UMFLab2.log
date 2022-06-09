@@ -1,19 +1,19 @@
 ﻿  main.cpp
-C:\Users\asaul\Documents\GitHub\UMF\UMFLab2\UMFLab2\main.cpp(115,1): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
-C:\Users\asaul\Documents\GitHub\UMF\UMFLab2\UMFLab2\main.cpp(205,1): warning C4267: return: преобразование из "size_t" в "int"; возможна потеря данных
-C:\Users\asaul\Documents\GitHub\UMF\UMFLab2\UMFLab2\main.cpp(229,1): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
-C:\Users\asaul\Documents\GitHub\UMF\UMFLab2\UMFLab2\main.cpp(309,1): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
-C:\Users\asaul\Documents\GitHub\UMF\UMFLab2\UMFLab2\main.cpp(401,1): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
-C:\Users\asaul\Documents\GitHub\UMF\UMFLab2\UMFLab2\main.cpp(402,1): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
-C:\Users\asaul\Documents\GitHub\UMF\UMFLab2\UMFLab2\main.cpp(403,1): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
-C:\Users\asaul\Documents\GitHub\UMF\UMFLab2\UMFLab2\main.cpp(404,1): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
-C:\Users\asaul\Documents\GitHub\UMF\UMFLab2\UMFLab2\main.cpp(436,34): warning C4244: =: преобразование "size_t" в "double", возможна потеря данных
-C:\Users\asaul\Documents\GitHub\UMF\UMFLab2\UMFLab2\main.cpp(440,36): warning C4244: =: преобразование "size_t" в "double", возможна потеря данных
-C:\Users\asaul\Documents\GitHub\UMF\UMFLab2\UMFLab2\main.cpp(442,70): warning C4244: аргумент: преобразование "double" в "const unsigned __int64", возможна потеря данных
-C:\Users\asaul\Documents\GitHub\UMF\UMFLab2\UMFLab2\main.cpp(445,29): warning C4244: =: преобразование "size_t" в "double", возможна потеря данных
-C:\Users\asaul\Documents\GitHub\UMF\UMFLab2\UMFLab2\main.cpp(446,50): warning C4244: аргумент: преобразование "double" в "const unsigned __int64", возможна потеря данных
-C:\Users\asaul\Documents\GitHub\UMF\UMFLab2\UMFLab2\main.cpp(449,1): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
-C:\Users\asaul\Documents\GitHub\UMF\UMFLab2\UMFLab2\main.cpp(450,1): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
-C:\Users\asaul\Documents\GitHub\UMF\UMFLab2\UMFLab2\main.cpp(451,1): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
-C:\Users\asaul\Documents\GitHub\UMF\UMFLab2\UMFLab2\main.cpp(452,1): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
-  UMFLab2.vcxproj -> C:\Users\asaul\Documents\GitHub\UMF\UMFLab2\x64\Debug\UMFLab2.exe
+C:\Users\asaul\Documents\Github\UMF\UMFLab2\UMFLab2\main.cpp(115,1): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\asaul\Documents\Github\UMF\UMFLab2\UMFLab2\main.cpp(206,1): warning C4267: return: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\asaul\Documents\Github\UMF\UMFLab2\UMFLab2\main.cpp(230,1): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\asaul\Documents\Github\UMF\UMFLab2\UMFLab2\main.cpp(310,1): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\asaul\Documents\Github\UMF\UMFLab2\UMFLab2\main.cpp(402,1): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\asaul\Documents\Github\UMF\UMFLab2\UMFLab2\main.cpp(403,1): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\asaul\Documents\Github\UMF\UMFLab2\UMFLab2\main.cpp(404,1): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\asaul\Documents\Github\UMF\UMFLab2\UMFLab2\main.cpp(405,1): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\asaul\Documents\Github\UMF\UMFLab2\UMFLab2\main.cpp(437,34): warning C4244: =: преобразование "size_t" в "double", возможна потеря данных
+C:\Users\asaul\Documents\Github\UMF\UMFLab2\UMFLab2\main.cpp(441,36): warning C4244: =: преобразование "size_t" в "double", возможна потеря данных
+C:\Users\asaul\Documents\Github\UMF\UMFLab2\UMFLab2\main.cpp(443,70): warning C4244: аргумент: преобразование "double" в "const unsigned __int64", возможна потеря данных
+C:\Users\asaul\Documents\Github\UMF\UMFLab2\UMFLab2\main.cpp(446,29): warning C4244: =: преобразование "size_t" в "double", возможна потеря данных
+C:\Users\asaul\Documents\Github\UMF\UMFLab2\UMFLab2\main.cpp(447,50): warning C4244: аргумент: преобразование "double" в "const unsigned __int64", возможна потеря данных
+C:\Users\asaul\Documents\Github\UMF\UMFLab2\UMFLab2\main.cpp(450,1): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\asaul\Documents\Github\UMF\UMFLab2\UMFLab2\main.cpp(451,1): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\asaul\Documents\Github\UMF\UMFLab2\UMFLab2\main.cpp(452,1): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\asaul\Documents\Github\UMF\UMFLab2\UMFLab2\main.cpp(453,1): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+  UMFLab2.vcxproj -> C:\Users\asaul\Documents\Github\UMF\UMFLab2\x64\Debug\UMFLab2.exe
