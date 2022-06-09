@@ -142,6 +142,18 @@ public:
       }
       return 0;
    }
+   void clear()
+   {
+      int size = di.size();
+      di.clear();
+      di.resize(size);
+      size = gu.size();
+      gu.clear();
+      gu.resize(size);
+      size = gl.size();
+      gl.clear();
+      gl.resize(size);
+   }
    void Tranc()
    {
       auto tmp = vector<double>(gl);
@@ -193,9 +205,9 @@ public:
       return di.size();
    }
 
-   void print()
+   void print(string filename = "out.txt")
    {
-      ofstream out("out.txt");
+      ofstream out(filename);
       for (int i = 0; i < di.size(); i++)
       {
          for (int j = 0; j < di.size(); j++)
@@ -466,6 +478,105 @@ public:
          res[i] = x[i];
    }
 };
+
+class LU
+{
+   Matrix lu;
+   vector<double> b;
+   vector<double> x;
+   vector<double> y;
+
+   void forward()
+   {
+      auto jg = lu.getColnsArray();
+      auto ig = lu.getRowsArray();
+
+      for (int i = 0; i < lu.size(); i++)
+      {
+         double sum = 0;
+         for (int indI = ig[i]; indI < ig[i + 1] - 2; indI++)
+         {
+            int indJ = jg[indI];
+            if (indJ >= i) break;
+            sum += y[indJ] * lu.getElement(i, indJ);
+         }
+         y[i] = b[i] - sum;
+      }
+   }
+
+   void backward()
+   {
+      auto jg = lu.getColnsArray();
+      auto ig = lu.getRowsArray();
+
+      for (int i = lu.size() - 1; i >= 0; i--)
+      {
+         double sum = 0;
+         //for (int indI = ig[i]; indI < ig[i + 1] - 2; indI++)
+         for (int indI = ig[i + 1] - 3; indI >= ig[i]; indI--)
+         {
+            int indJ = jg[indI];
+            if (indJ <= i) break;
+            sum += x[indJ] * lu.getElement(i, indJ);
+         }
+         x[i] = (y[i] - sum) / lu.getElement(i, i);
+      }
+   }
+public:
+   LU(Matrix& a, vector<double>& b)
+   {
+      lu = Matrix(a);
+      this->b = vector<double>(b);
+      x.resize(b.size());
+      y.resize(b.size());
+      auto jg = a.getColnsArray();
+      auto ig = a.getRowsArray();
+
+      for (int i = 0; i < a.size(); i++)
+      {
+         for (int indI = ig[i]; indI < ig[i + 1] - 2; indI++)
+         {
+            int indJ = jg[indI];
+            if (i <= indJ)
+            {
+               double sum = 0;
+               for (int k = 0; k < i; k++)
+                  sum += lu.getElement(i, k) * lu.getElement(k, indJ);
+               lu.setElement(i, indJ, a.getElement(i, indJ) - sum);
+            }
+            if (i > indJ)
+            {
+               double sum = 0;
+               for (int k = 0; k < indJ; k++)
+               {
+                  double ukj = lu.getElement(k, indJ);
+                  sum += lu.getElement(i, k) * ukj;
+               }
+               lu.setElement(i, indJ, (a.getElement(i, indJ) - sum) / lu.getElement(indJ, indJ));
+            }
+         }
+         
+      }
+   }
+   
+   void print(string filename)
+   {
+      lu.print(filename);
+   }
+
+   void solve()
+   {
+      forward();
+      backward();
+   }
+   void getResult(vector<double>& res)
+   {
+      for (int i = 0; i < x.size(); i++)
+         res[i] = x[i];
+   }
+};
+
+
 
 class FEM
 {
@@ -824,10 +935,15 @@ public:
    void solve()
    {
       //BCG solv(a, b, 2);
-      LOS solv(a, b, 10000);
+      LU testi(a, b);
+      a.print();
+      testi.print("lu.txt");
+      testi.solve();
+      testi.getResult(q);
+      /*LOS solv(a, b, 10000);
       auto x = vector<double>(b.size(), 0);
       solv.calculate(x);
-      solv.getResult(q);
+      solv.getResult(q);*/
    }
 
    void print()
@@ -846,7 +962,7 @@ public:
 int main()
 {
    FEM fem;
-   fem.Init(32, 32);
+   fem.Init(2, 2);
    fem.setParams("", 0, 0, 0, 1);
    fem.setMatrix();
    fem.FirstBound();

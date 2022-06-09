@@ -1,27 +1,30 @@
 ﻿  main.cpp
-C:\Users\asaul\Documents\Github\UMF\UMFLab3-4\UMFLab3-4\main.cpp(188,1): warning C4267: return: преобразование из "size_t" в "int"; возможна потеря данных
-C:\Users\asaul\Documents\Github\UMF\UMFLab3-4\UMFLab3-4\main.cpp(193,1): warning C4267: return: преобразование из "size_t" в "int"; возможна потеря данных
-C:\Users\asaul\Documents\Github\UMF\UMFLab3-4\UMFLab3-4\main.cpp(569,1): warning C4267: =: преобразование из "size_t" в "_Ty"; возможна потеря данных
+C:\Users\asaul\Documents\GitHub\UMF\UMFLab3-4\UMFLab3-4\main.cpp(147,1): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\asaul\Documents\GitHub\UMF\UMFLab3-4\UMFLab3-4\main.cpp(150,1): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\asaul\Documents\GitHub\UMF\UMFLab3-4\UMFLab3-4\main.cpp(153,1): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\asaul\Documents\GitHub\UMF\UMFLab3-4\UMFLab3-4\main.cpp(200,1): warning C4267: return: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\asaul\Documents\GitHub\UMF\UMFLab3-4\UMFLab3-4\main.cpp(205,1): warning C4267: return: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\asaul\Documents\GitHub\UMF\UMFLab3-4\UMFLab3-4\main.cpp(680,1): warning C4267: =: преобразование из "size_t" в "_Ty"; возможна потеря данных
           with
           [
               _Ty=int
           ]
-C:\Users\asaul\Documents\Github\UMF\UMFLab3-4\UMFLab3-4\main.cpp(570,1): warning C4267: =: преобразование из "size_t" в "_Ty"; возможна потеря данных
+C:\Users\asaul\Documents\GitHub\UMF\UMFLab3-4\UMFLab3-4\main.cpp(681,1): warning C4267: =: преобразование из "size_t" в "_Ty"; возможна потеря данных
           with
           [
               _Ty=int
           ]
-C:\Users\asaul\Documents\Github\UMF\UMFLab3-4\UMFLab3-4\main.cpp(592,1): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
-C:\Users\asaul\Documents\Github\UMF\UMFLab3-4\UMFLab3-4\main.cpp(687,1): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
-C:\Users\asaul\Documents\Github\UMF\UMFLab3-4\UMFLab3-4\main.cpp(775,1): warning C4267: +=: преобразование из "size_t" в "int"; возможна потеря данных
-C:\Users\asaul\Documents\Github\UMF\UMFLab3-4\UMFLab3-4\main.cpp(784,1): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
-C:\Users\asaul\Documents\Github\UMF\UMFLab3-4\UMFLab3-4\main.cpp(792,1): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
-C:\Users\asaul\Documents\Github\UMF\UMFLab3-4\UMFLab3-4\main.cpp(800,1): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
-C:\Users\asaul\Documents\Github\UMF\UMFLab3-4\UMFLab3-4\main.cpp(801,1): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
-C:\Users\asaul\Documents\Github\UMF\UMFLab3-4\UMFLab3-4\main.cpp(805,1): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
-C:\Users\asaul\Documents\Github\UMF\UMFLab3-4\UMFLab3-4\main.cpp(805,1): warning C4267: +=: преобразование из "size_t" в "int"; возможна потеря данных
-C:\Users\asaul\Documents\Github\UMF\UMFLab3-4\UMFLab3-4\main.cpp(814,1): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
-C:\Users\asaul\Documents\Github\UMF\UMFLab3-4\UMFLab3-4\main.cpp(815,1): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
-C:\Users\asaul\Documents\Github\UMF\UMFLab3-4\UMFLab3-4\main.cpp(816,1): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
-C:\Users\asaul\Documents\Github\UMF\UMFLab3-4\UMFLab3-4\main.cpp(839,1): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
-  UMFLab3-4.vcxproj -> C:\Users\asaul\Documents\Github\UMF\UMFLab3-4\x64\Debug\UMFLab3-4.exe
+C:\Users\asaul\Documents\GitHub\UMF\UMFLab3-4\UMFLab3-4\main.cpp(703,1): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\asaul\Documents\GitHub\UMF\UMFLab3-4\UMFLab3-4\main.cpp(798,1): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\asaul\Documents\GitHub\UMF\UMFLab3-4\UMFLab3-4\main.cpp(886,1): warning C4267: +=: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\asaul\Documents\GitHub\UMF\UMFLab3-4\UMFLab3-4\main.cpp(895,1): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\asaul\Documents\GitHub\UMF\UMFLab3-4\UMFLab3-4\main.cpp(903,1): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\asaul\Documents\GitHub\UMF\UMFLab3-4\UMFLab3-4\main.cpp(911,1): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\asaul\Documents\GitHub\UMF\UMFLab3-4\UMFLab3-4\main.cpp(912,1): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\asaul\Documents\GitHub\UMF\UMFLab3-4\UMFLab3-4\main.cpp(916,1): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\asaul\Documents\GitHub\UMF\UMFLab3-4\UMFLab3-4\main.cpp(916,1): warning C4267: +=: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\asaul\Documents\GitHub\UMF\UMFLab3-4\UMFLab3-4\main.cpp(925,1): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\asaul\Documents\GitHub\UMF\UMFLab3-4\UMFLab3-4\main.cpp(926,1): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\asaul\Documents\GitHub\UMF\UMFLab3-4\UMFLab3-4\main.cpp(927,1): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\asaul\Documents\GitHub\UMF\UMFLab3-4\UMFLab3-4\main.cpp(955,1): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+  UMFLab3-4.vcxproj -> C:\Users\asaul\Documents\GitHub\UMF\UMFLab3-4\x64\Debug\UMFLab3-4.exe
